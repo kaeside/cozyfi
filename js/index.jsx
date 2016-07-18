@@ -118,31 +118,31 @@ const styles = {
 };
 
 
-const Gridz = () => (
-  <div style={styles.root}>
-    <GridList
-      cols={2}
-      cellHeight={200}
-      padding={1}
-      style={styles.gridList}
-    >
-      {tilesData.map((tile) => (
-        <GridTile
-          key={tile.img}
-          title={tile.title}
-          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-          actionPosition="left"
-          titlePosition="top"
-          titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-          cols={tile.featured ? 2 : 1}
-          rows={tile.featured ? 2 : 1}
-        >
-          <img src={tile.img} />
-        </GridTile>
-      ))}
-    </GridList>
-  </div>
-);
+// const Gridz = () => (
+//   <div style={styles.root}>
+//     <GridList
+//       cols={2}
+//       cellHeight={200}
+//       padding={1}
+//       style={styles.gridList}
+//     >
+//       {tilesData.map((tile) => (
+//         <GridTile
+//           key={tile.img}
+//           title={tile.title}
+//           actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+//           actionPosition="left"
+//           titlePosition="top"
+//           titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+//           cols={tile.featured ? 2 : 1}
+//           rows={tile.featured ? 2 : 1}
+//         >
+//           <img src={tile.img} />
+//         </GridTile>
+//       ))}
+//     </GridList>
+//   </div>
+// );
 
 
 
@@ -230,7 +230,7 @@ export default class Cardz extends React.Component {
 
         // this.setState({expanded: false});
   };
-  
+
 
   render() {
     return (

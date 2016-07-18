@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
+import { GoogleMap, GoogleMapLoader, Marker, SearchBox, PlacesService } from "react-google-maps";
 
 const searchStyles = {
     border: '1px solid transparent',
@@ -28,7 +28,6 @@ export default class CozyFiMap extends React.Component {
       //BINDS THIS TO EACH FUNCTION
       this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
-      this.initMap = this.initMap.bind(this);
 
       this.state = {
           bounds: null,
@@ -37,10 +36,6 @@ export default class CozyFiMap extends React.Component {
       }
   }
 
-  // let mapCenter = {
-  //     lat: 36.002453,
-  //     lng: -78.905869,
-  // }
 
   handleBoundsChanged() {
     this.setState({
@@ -67,35 +62,49 @@ export default class CozyFiMap extends React.Component {
       center: mapCenter,
       markers,
     });
+    var infowindow = new google.maps.InfoWindow();
+    // var service = new google.maps.places.PlacesService(map);
+
   }
 
-  initMap() {
-    //  var map = new google.maps.Map( {
-    //    center: this.state.center,
-    //    zoom: 15
-    //  });
+    ///////////////////////////
+//    initMap() {
+//   // Create a map to show the results, and an info window to
+//   // pop up if the user clicks on the place marker.
+//   // var pyrmont = new google.maps.LatLng(-33.8665, 151.1956);mapCenter
+//
+// }
+//
+// function placeDetailsByPlaceId(service, map, infowindow) {
+//   // Create and send the request to obtain details for a specific place,
+//   // using its Place ID.
+//   var request = {
+//     placeId: document.getElementById('place-id').value
+//   };
+//
+//   service.getDetails(request, function (place, status) {
+//     if (status == google.maps.places.PlacesServiceStatus.OK) {
+//       // If the request succeeds, draw the place location on the map
+//       // as a marker, and register an event to handle a click on the marker.
+//       var marker = new google.maps.Marker({
+//         map: map,
+//         position: place.geometry.location
+//       });
+//
+//       google.maps.event.addListener(marker, 'click', function() {
+//         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+//           'Place ID: ' + place.place_id + '<br>' +
+//           place.formatted_address + '</div>');
+//         infowindow.open(map, this);
+//       });
+//
+//       map.panTo(place.geometry.location);
+//     }
+//   });
+// }
 
-     var infowindow = new google.maps.InfoWindow();
-     var service = new google.maps.places.PlacesService(mapCenter);
-
-     service.getDetails({
-         //need to find out how to get grab placeId from marker
-       placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-     }, function(place, status) {
-       if (status === google.maps.places.PlacesServiceStatus.OK) {
-         var marker = new google.maps.Marker({
-           map: mapCenter,
-           position: place.geometry.location
-         });
-         google.maps.event.addListener(marker, 'click', function() {
-           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-             'Place ID: ' + place.place_id + '<br>' +
-             place.formatted_address + '</div>');
-           infowindow.open(mapCenter, this);
-         });
-       }
-     });
-   }
+// Run the initialize function when the window has finished loading.
+/////////////////////////////
   render() {
     return (
       <GoogleMap
@@ -115,7 +124,7 @@ export default class CozyFiMap extends React.Component {
           controlPosition={google.maps.ControlPosition.TOP_LEFT}
           onPlacesChanged={this.handlePlacesChanged}
           ref="searchBox"
-          placeholder="Customized your placeholder"
+          placeholder="Search for a coworking space"
           style={searchStyles}
         />
         {this.state.markers.map((marker, index) => (
